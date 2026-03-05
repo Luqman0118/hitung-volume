@@ -98,11 +98,7 @@ class _MyHomePageState extends State<MyHomePage> {
       children: [
         const Text(
           'Rumus: V = s³',
-          style: TextStyle(
-            fontSize: 16,
-            fontStyle: FontStyle.italic,
-            color: Colors.teal,
-          ),
+          style: TextStyle(fontSize: 16, fontStyle: FontStyle.italic, color: Colors.teal),
         ),
         const SizedBox(height: 16),
         _buildTextField(_kubusController, 'Panjang Sisi (s)', 'cm'),
@@ -116,11 +112,7 @@ class _MyHomePageState extends State<MyHomePage> {
       children: [
         const Text(
           'Rumus: V = π × r² × t',
-          style: TextStyle(
-            fontSize: 16,
-            fontStyle: FontStyle.italic,
-            color: Colors.teal,
-          ),
+          style: TextStyle(fontSize: 16, fontStyle: FontStyle.italic, color: Colors.teal),
         ),
         const SizedBox(height: 16),
         _buildTextField(_tabungJariController, 'Jari-jari (r)', 'cm'),
@@ -136,11 +128,7 @@ class _MyHomePageState extends State<MyHomePage> {
       children: [
         const Text(
           'Rumus: V = ⅓ × p × l × t',
-          style: TextStyle(
-            fontSize: 16,
-            fontStyle: FontStyle.italic,
-            color: Colors.teal,
-          ),
+          style: TextStyle(fontSize: 16, fontStyle: FontStyle.italic, color: Colors.teal),
         ),
         const SizedBox(height: 16),
         _buildTextField(_piraAlasPController, 'Panjang Alas (p)', 'cm'),
@@ -153,10 +141,7 @@ class _MyHomePageState extends State<MyHomePage> {
   }
 
   Widget _buildTextField(
-    TextEditingController controller,
-    String label,
-    String suffix,
-  ) {
+      TextEditingController controller, String label, String suffix) {
     return TextField(
       controller: controller,
       keyboardType: const TextInputType.numberWithOptions(decimal: true),
@@ -173,11 +158,7 @@ class _MyHomePageState extends State<MyHomePage> {
   }
 
   Widget _buildShapeIcon(int index) {
-    final icons = [
-      Icons.crop_square,
-      Icons.circle_outlined,
-      Icons.change_history,
-    ];
+    final icons = [Icons.crop_square, Icons.circle_outlined, Icons.change_history];
     final labels = ['Kubus', 'Tabung', 'Piramida'];
     final isSelected = _selectedIndex == index;
     return GestureDetector(
@@ -194,22 +175,12 @@ class _MyHomePageState extends State<MyHomePage> {
           color: isSelected ? Colors.teal : Colors.grey.shade200,
           borderRadius: BorderRadius.circular(12),
           boxShadow: isSelected
-              ? [
-                  BoxShadow(
-                    color: Colors.teal.withOpacity(0.4),
-                    blurRadius: 8,
-                    offset: const Offset(0, 3),
-                  ),
-                ]
+              ? [BoxShadow(color: Colors.teal.withOpacity(0.4), blurRadius: 8, offset: const Offset(0, 3))]
               : [],
         ),
         child: Column(
           children: [
-            Icon(
-              icons[index],
-              color: isSelected ? Colors.white : Colors.grey.shade600,
-              size: 28,
-            ),
+            Icon(icons[index], color: isSelected ? Colors.white : Colors.grey.shade600, size: 28),
             const SizedBox(height: 4),
             Text(
               labels[index],
@@ -248,9 +219,7 @@ class _MyHomePageState extends State<MyHomePage> {
             // Form Card
             Card(
               elevation: 4,
-              shape: RoundedRectangleBorder(
-                borderRadius: BorderRadius.circular(16),
-              ),
+              shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(16)),
               child: Padding(
                 padding: const EdgeInsets.all(20),
                 child: Column(
@@ -258,10 +227,7 @@ class _MyHomePageState extends State<MyHomePage> {
                   children: [
                     Text(
                       'Volume ${_shapes[_selectedIndex]}',
-                      style: const TextStyle(
-                        fontSize: 20,
-                        fontWeight: FontWeight.bold,
-                      ),
+                      style: const TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
                     ),
                     const Divider(height: 24),
                     if (_selectedIndex == 0) _buildKubusForm(),
@@ -285,9 +251,7 @@ class _MyHomePageState extends State<MyHomePage> {
                       backgroundColor: Colors.teal,
                       foregroundColor: Colors.white,
                       padding: const EdgeInsets.symmetric(vertical: 14),
-                      shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(12),
-                      ),
+                      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
                     ),
                   ),
                 ),
@@ -301,9 +265,7 @@ class _MyHomePageState extends State<MyHomePage> {
                       foregroundColor: Colors.teal,
                       padding: const EdgeInsets.symmetric(vertical: 14),
                       side: const BorderSide(color: Colors.teal),
-                      shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(12),
-                      ),
+                      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
                     ),
                   ),
                 ),
@@ -312,16 +274,18 @@ class _MyHomePageState extends State<MyHomePage> {
             const SizedBox(height: 24),
 
             // Result Card
-            if (_result != null)
-              AnimatedOpacity(
-                opacity: _result != null ? 1 : 0,
-                duration: const Duration(milliseconds: 400),
+            AnimatedOpacity(
+              opacity: _result != null ? 1.0 : 0.0,
+              duration: const Duration(milliseconds: 400),
+              child: Visibility(
+                visible: _result != null,
+                maintainState: true,
+                maintainAnimation: true,
+                maintainSize: true,
                 child: Card(
                   color: Colors.teal.shade50,
                   elevation: 3,
-                  shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(16),
-                  ),
+                  shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(16)),
                   child: Padding(
                     padding: const EdgeInsets.all(20),
                     child: Column(
@@ -332,7 +296,7 @@ class _MyHomePageState extends State<MyHomePage> {
                         ),
                         const SizedBox(height: 8),
                         Text(
-                          '${_result!.toStringAsFixed(4)} cm³',
+                          _result != null ? '${_result!.toStringAsFixed(4)} cm³' : '',
                           style: const TextStyle(
                             fontSize: 32,
                             fontWeight: FontWeight.bold,
@@ -344,6 +308,7 @@ class _MyHomePageState extends State<MyHomePage> {
                   ),
                 ),
               ),
+            ),
           ],
         ),
       ),
